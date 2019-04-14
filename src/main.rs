@@ -1,6 +1,5 @@
 
 #[macro_use] extern crate prettytable;
-// #[macro_use] extern crate text_io;
 extern crate reqwest;
 extern crate select;
 
@@ -38,11 +37,18 @@ fn do_scrap(url: &str) {
         let url = node.attr("href").unwrap();
         let url_trim = url.trim_start_matches('/');
         
-        let url_final = format!(" | {} | {}", count, url_trim);
+        let status;
+
+        if url.contains("https://") {
+            status = "external"
+        } else {
+            status = "internal"
+        }
+
+        let url_final = format!(" | {} | {} | {}", count, status, url_trim);
         count += 1;
 
         table.add_row(row![FdBybl->url_final]);
     }
-
     table.printstd();
 }
