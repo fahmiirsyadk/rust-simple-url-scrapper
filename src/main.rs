@@ -35,20 +35,17 @@ fn do_scrap(url: &str) {
 
     for node in document.find(Name("a")) {
         let url = node.attr("href").unwrap();
-        let url_trim = url.trim_start_matches('/');
-        
-        let status;
+        let url_final;
 
         if url.contains("https://") {
-            status = "external"
+            url_final = format!(" | {} | {} | {}", count, "external", url);
+            table.add_row(row![FdBybl->url_final]);
         } else {
-            status = "internal"
+            url_final = format!(" | {} | {} | {}", count, "internal", url);
+            table.add_row(row![FdBgbl->url_final]);
         }
 
-        let url_final = format!(" | {} | {} | {}", count, status, url_trim);
         count += 1;
-
-        table.add_row(row![FdBybl->url_final]);
     }
     table.printstd();
 }
