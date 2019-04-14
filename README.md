@@ -1,7 +1,7 @@
 # Rust simple url scrapper
 scrapping url from web
 
-![image](https://i.imgur.com/UA1abT2.png)
+![image](https://i.imgur.com/PaDUNz6.png)
 
 
 ### features: 
